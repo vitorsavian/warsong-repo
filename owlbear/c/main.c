@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 	int i;
 
 	// this begins the CLI and make it work
-        if (argc == 1 || isStrEqual("1", "1")) {
+        if (argc == 1 || isStrEqual(argv[1], "help")) {
                 printf( "please you need to pass some info\n" );
         } else {
                 printf( "Arguments:\n" );
