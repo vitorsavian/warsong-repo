@@ -2,3 +2,6 @@ target
 *.lock
 
 compile
+
+.idea
+cmake-build-debug

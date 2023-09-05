@@ -4,13 +4,13 @@ SRC_DIR = .
 
 all: compile clean
 
-compile: main.o utils/utils.o
+compile: main.o utils
 	$(CC) $(CFLAGS) -o $@ $^
 
-main.o: main.c utils/utils.h
+main.o: main.c utils
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-utils/utils.o: utils/utils.c utils/utils.h
+utils/utils.o: utils utils
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean: 
