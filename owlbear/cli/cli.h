@@ -7,6 +7,7 @@ typedef struct {
 } CliItem;
 
 void cliHelp();
+void cliTitle();
 int cliVerify();
 
 #endif // !CLI_H_

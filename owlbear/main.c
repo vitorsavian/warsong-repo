@@ -1,3 +1,4 @@
+#include "./cli/cli.h"
 #include "./utils/utils.h"
 #include <stdio.h>
 
@@ -8,7 +9,7 @@ int main(int argc, char *argv[]) {
 
   // this begins the CLI and make it work
   if (argc == 1 || isStrEqual(argv[1], "help")) {
-    printf("please you need to pass some info\n");
+    cliHelp();
   } else {
     printf("Arguments:\n");
     for (i = 1; i < argc; ++i) {
