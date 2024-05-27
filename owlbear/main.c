@@ -10,11 +10,12 @@ int main(int argc, char *argv[]) {
   // this begins the CLI and make it work
   if (argc == 1 || isStrEqual(argv[1], "help")) {
     cliHelp();
-  } else {
-    printf("Arguments:\n");
-    for (i = 1; i < argc; ++i) {
-      printf("  %d. %s\n", i, argv[i]);
-    };
+    return EXIT_SUCCESS;
+  };
+
+  printf("Arguments:\n");
+  for (i = 1; i < argc; ++i) {
+    printf("  %d. %s\n", i, argv[i]);
   };
 
   return EXIT_SUCCESS;
