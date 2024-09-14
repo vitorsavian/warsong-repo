@@ -1,18 +1,21 @@
 package tcp
 
-import "github.com/labstack/echo/v4"
+import (
+	"log"
 
-type Server struct {
-	IPv4 string
-	Port int
-}
+	"github.com/labstack/echo/v4"
+)
 
-func CreateServer(config Server) *echo.Echo {
+func (c *EchoConfig) CreateServer() {
 	e := echo.New()
 
-	return e
+	c.Conn = e
 }
 
-func Listen(server *echo.Echo) {
+func (c *EchoConfig) Listen() {
+	c.SetupRoutes()
 
+	if err := c.Conn.Server.ListenAndServe(); err != nil {
+		log.Fatal("Fatal")
+	}
 }
