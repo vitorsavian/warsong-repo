@@ -1,5 +1,7 @@
 package character
 
+import "github.com/vitorsavian/DungeonsAndDragons/pkg/domain/weapon"
+
 type Character struct {
 	Id   string
 	Name string
@@ -17,6 +19,8 @@ type Character struct {
 	Courage int16
 
 	Feat []Feat
+
+	Weapon *weapon.Weapon
 }
 
 type Feat struct {
@@ -24,12 +28,18 @@ type Feat struct {
 	Description string
 }
 
+func CreateCharacter() *Character {
+
+	return nil
+}
+
 func (c *Character) LevelUp() {
 	c.HP += int16(c.Con)
 	c.SP += int16(c.Int)
+
 }
 
-func (c *Character) Fight() {
+func (c *Character) Fight(enemy *Character) {
 
 }
 
