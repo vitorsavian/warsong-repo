@@ -1,5 +1,5 @@
 services:
-  db:
+  db-postgre:
     container_name: postgres-container
     image: postgres
     restart: always
@@ -10,6 +10,15 @@ services:
       - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
+  db-mongo:
+    container_name: mongo-container
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
 
 volumes:
   postgres-data:
