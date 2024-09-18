@@ -1,16 +1,26 @@
 package request
 
-type CharacterCreationRequest struct {
-	Level int8
-	Name  string
+import "github.com/labstack/echo/v4"
 
-	Str int8
-	Dex int8
-	Con int8
-	Cha int8
-	Int int8
-	Wil int8
+type CharacterCreationRequest struct {
+	Level int8   `json:"level"`
+	Name  string `json:"name"`
+
+	Stats StatsCharacterCreationRequest `json:"stats"`
+}
+
+type StatsCharacterCreationRequest struct {
+	Str int8 `json:"str"`
+	Dex int8 `json:"dex"`
+	Con int8 `json:"con"`
+	Cha int8 `json:"cha"`
+	Int int8 `json:"int"`
+	Wil int8 `json:"wil"`
 }
 
 type CharacterUpdateRequest struct {
+}
+
+func CreateCharacter(c echo.Context) error {
+	return nil
 }

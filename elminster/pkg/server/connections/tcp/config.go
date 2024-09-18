@@ -6,6 +6,17 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+func Server() error {
+	createConfig := &Config{
+		IPv4:      "",
+		Port:      3000,
+		Framework: &EchoConfig{},
+	}
+
+	createConfig.Framework.CreateServer()
+	return nil
+}
+
 func (c *EchoConfig) CreateServer() {
 	e := echo.New()
 
