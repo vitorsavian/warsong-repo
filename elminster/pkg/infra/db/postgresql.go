@@ -2,10 +2,24 @@ package db
 
 import (
 	"context"
-	"github.com/jackz/pgx/v5"
-	"os"
+	"fmt"
+
+	"github.com/jackc/pgx/v5"
 )
 
-func CreatePoolConnection() {
-	conn, err := pgx.Connect(context.Background(), "URL")
+func (d *DatabaseConfig) CreateURL() string {
+	return fmt.Sprintf("postgresql://%s:%s@%s/%s", d.Login, d.Password, d.IP, d.Database)
+}
+
+func (d *DatabaseConfig) CreatePoolConnection() error {
+	connection := &ConnectionClient{}
+	var err error
+
+	connection.Client, err = pgx.Connect(context.Background(), d.CreateURL())
+	if err != nil {
+		return err
+	}
+
+	d.Connection = connection
+	return nil
 }

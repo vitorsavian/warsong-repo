@@ -422,3 +422,5 @@ zig-out/
 zig-cache/
 
 vendor
+
+.env
