@@ -25,17 +25,12 @@ type Feat struct {
 }
 
 func CreateCharacter() *Character {
-
 	return nil
 }
 
 func (c *Character) LevelUp() {
 	c.HP += int16(c.Con)
 	c.SP += int16(c.Int)
-
-}
-
-func (c *Character) Fight(enemy *Character) {
 
 }
 
