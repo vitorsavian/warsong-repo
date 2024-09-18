@@ -1,6 +1,6 @@
 package tcp
 
-import "github.com/vitorsavian/DungeonsAndDragons/pkg/adapter/request"
+import "github.com/vitorsavian/warsong-repo/elminster/pkg/adapter/request"
 
 func (e *EchoConfig) SetupRoutes() {
 	api := e.Conn.Group("/api")

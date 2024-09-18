@@ -1,7 +1,5 @@
 package character
 
-import "github.com/vitorsavian/DungeonsAndDragons/pkg/domain/weapon"
-
 type Character struct {
 	Id   string
 	Name string
@@ -19,8 +17,6 @@ type Character struct {
 	Courage int16
 
 	Feat []Feat
-
-	Weapon *weapon.Weapon
 }
 
 type Feat struct {

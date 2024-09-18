@@ -1,4 +1,4 @@
-module github.com/vitorsavian/DungeonsAndDragons
+module github.com/vitorsavian/warsong-repo/elminster
 
 go 1.22.3
 
