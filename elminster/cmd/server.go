@@ -7,22 +7,19 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/vitorsavian/warsong-repo/elminster/pkg/server/connections/tcp"
 )
 
 // serverCmd represents the server command
 var serverCmd = &cobra.Command{
 	Use:   "server",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Server for tcp connections",
+	Long: `It will create a tcp server with the possibility to also
+  create a character by the api`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("server called")
-		fmt.Println("Juba é gostoso")
+		fmt.Println("initianting tcp server")
 
+		tcp.Server()
 	},
 }
 

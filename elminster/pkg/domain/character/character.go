@@ -24,7 +24,7 @@ type Feat struct {
 	Description string
 }
 
-func CreateCharacter() *Character {
+func CreateCharacter() error {
 	return nil
 }
 
