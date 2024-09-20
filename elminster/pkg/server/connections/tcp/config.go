@@ -6,7 +6,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func Server() error {
+func (g *GeneralController) Server() error {
 	createConfig := &Config{
 		IPv4:      "",
 		Port:      3000,
