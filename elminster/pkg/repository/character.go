@@ -1,17 +1,25 @@
 package repository
 
-func CreateCharacter() {
+import (
+	"github.com/jackc/pgx/v5"
+)
+
+type ConnectionClient struct {
+	Client *pgx.Conn
+}
+
+func (c *ConnectionClient) CreateCharacter() {
 
 }
 
-func DeleteCharacter() {
+func (c *ConnectionClient) DeleteCharacter() {
 
 }
 
-func UpdateCharacter() {
+func (c *ConnectionClient) UpdateCharacter() {
 
 }
 
-func GetCharacter() {
+func (c *ConnectionClient) GetCharacter() {
 
 }

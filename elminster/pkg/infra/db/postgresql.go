@@ -5,21 +5,21 @@ import (
 	"fmt"
 
 	"github.com/jackc/pgx/v5"
+	"github.com/vitorsavian/warsong-repo/elminster/pkg/repository"
 )
 
 func (d *DatabaseConfig) CreateURL() string {
 	return fmt.Sprintf("postgresql://%s:%s@%s/%s", d.Login, d.Password, d.IP, d.Database)
 }
 
-func (d *DatabaseConfig) CreatePoolConnection() error {
-	connection := &ConnectionClient{}
+func (d *DatabaseConfig) CreatePoolConnection() (*repository.ConnectionClient, error) {
+	connection := repository.ConnectionClient{}
 	var err error
 
 	connection.Client, err = pgx.Connect(context.Background(), d.CreateURL())
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	d.Connection = connection
-	return nil
+	return &connection, nil
 }
