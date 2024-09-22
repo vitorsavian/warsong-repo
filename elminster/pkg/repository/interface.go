@@ -1,6 +1,6 @@
 package repository
 
-type Character interface {
+type ICharacter interface {
 	CreateCharacter()
 	DeleteCharacter()
 	UpdateCharacter()

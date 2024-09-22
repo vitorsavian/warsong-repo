@@ -9,17 +9,18 @@ type ConnectionClient struct {
 }
 
 func (c *ConnectionClient) CreateCharacter() {
+	return
 
 }
 
 func (c *ConnectionClient) DeleteCharacter() {
-
+	return
 }
 
 func (c *ConnectionClient) UpdateCharacter() {
-
+	return
 }
 
 func (c *ConnectionClient) GetCharacter() {
-
+	return
 }

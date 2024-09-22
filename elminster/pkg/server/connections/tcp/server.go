@@ -1,8 +1,12 @@
 package tcp
 
-import "github.com/labstack/echo/v4"
+import (
+	"fmt"
+
+	"github.com/labstack/echo/v4"
+)
 
 func CreateCharacter(c echo.Context) error {
-
+	fmt.Println("testing this")
 	return nil
 }
