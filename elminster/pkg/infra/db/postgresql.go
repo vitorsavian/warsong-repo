@@ -8,6 +8,22 @@ import (
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/repository"
 )
 
+type DatabaseConfig struct {
+	Port int
+	IP   string
+
+	Login    string
+	Password string
+
+	Database string
+}
+
+func CreateConfig() *DatabaseConfig {
+	return &DatabaseConfig{
+		Login: "",
+	}
+}
+
 func (d *DatabaseConfig) CreateURL() string {
 	return fmt.Sprintf("postgresql://%s:%s@%s/%s", d.Login, d.Password, d.IP, d.Database)
 }

@@ -1,4 +1,4 @@
-package request
+package adapter
 
 type CharacterCreationRequestAdapter struct {
 	Level int8   `json:"level"`
