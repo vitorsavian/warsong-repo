@@ -11,7 +11,7 @@ import (
 var lockCharacterController = &sync.Mutex{}
 
 type CharacterController struct {
-	CharacterRepo *repository.ICharacter
+	CharacterRepo repository.ICharacter
 }
 
 var CharacterControllerStance *CharacterController
