@@ -6,7 +6,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func (g *GeneralController) Server() error {
+func ConfigServer() (*Config, error) {
 	createConfig := &Config{
 		IPv4:      "",
 		Port:      3000,
@@ -14,7 +14,7 @@ func (g *GeneralController) Server() error {
 	}
 
 	createConfig.Framework.CreateServer()
-	return nil
+	return createConfig, nil
 }
 
 func (c *EchoConfig) CreateServer() {

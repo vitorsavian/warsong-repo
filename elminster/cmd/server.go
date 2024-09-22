@@ -7,7 +7,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	"github.com/vitorsavian/warsong-repo/elminster/pkg/server/connections/tcp"
+	environment "github.com/vitorsavian/warsong-repo/elminster/pkg/infra/env"
 )
 
 // serverCmd represents the server command
@@ -19,12 +19,17 @@ var serverCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("initianting tcp server")
 
-		tcp.Server()
+		env, _ := cmd.Flags().GetString("term")
+
+		environment.SetEnv(env)
+
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(serverCmd)
+
+	serverCmd.PersistentFlags().String("env", "dev", "Environment that will run the app")
 
 	// Here you will define your flags and configuration settings.
 

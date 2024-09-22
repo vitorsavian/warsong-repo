@@ -3,8 +3,8 @@ module github.com/vitorsavian/warsong-repo/elminster
 go 1.22.3
 
 require (
-	github.com/Netflix/go-env v0.1.0
 	github.com/jackc/pgx/v5 v5.7.1
+	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v4 v4.12.0
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.8.0

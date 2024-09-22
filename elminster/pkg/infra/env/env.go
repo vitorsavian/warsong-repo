@@ -1,18 +1,15 @@
 package environment
 
 import (
-	libenv "github.com/Netflix/go-env"
+	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 )
 
-type Env struct {
-}
-
-func GetEnv() *Env {
-	var env *Env
-	_, err := libenv.UnmarshalFromEnviron(env)
-	if err != nil {
-		logrus.Fatalf("Env deu pal")
+func SetEnv(env string) {
+	if env != "prd" {
+		err := godotenv.Load()
+		if err != nil {
+			logrus.Fatal("Error loading .env file")
+		}
 	}
-	return env
 }
