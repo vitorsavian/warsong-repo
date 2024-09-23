@@ -6,8 +6,10 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	environment "github.com/vitorsavian/warsong-repo/elminster/pkg/infra/env"
+	"github.com/vitorsavian/warsong-repo/elminster/pkg/server/connections/tcp"
 )
 
 // serverCmd represents the server command
@@ -22,7 +24,12 @@ var serverCmd = &cobra.Command{
 		env, _ := cmd.Flags().GetString("term")
 
 		environment.SetEnv(env)
+		config, err := tcp.ConfigServer()
+		if err != nil {
+			logrus.Fatal("teste")
+		}
 
+		config.Listen()
 	},
 }
 

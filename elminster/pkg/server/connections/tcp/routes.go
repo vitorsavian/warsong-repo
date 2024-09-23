@@ -1,7 +1,7 @@
 package tcp
 
-func (e *EchoConfig) SetupRoutes() {
-	api := e.Conn.Group("/api")
+func (e *Config) SetupRoutes() {
+	api := e.Framework.Conn.Group("/api")
 
 	character := api.Group("/character")
 	character.GET(":id", nil)

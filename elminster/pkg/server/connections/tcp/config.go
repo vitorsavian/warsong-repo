@@ -1,15 +1,18 @@
 package tcp
 
 import (
-	"log"
+	"fmt"
+	"net/http"
+	"os"
 
 	"github.com/labstack/echo/v4"
+	"github.com/sirupsen/logrus"
 )
 
 func ConfigServer() (*Config, error) {
 	createConfig := &Config{
 		IPv4:      "",
-		Port:      3000,
+		Port:      os.Getenv("SERVER_TCP_PORT"),
 		Framework: &EchoConfig{},
 	}
 
@@ -23,10 +26,16 @@ func (c *EchoConfig) CreateServer() {
 	c.Conn = e
 }
 
-func (c *EchoConfig) Listen() {
+func (c *Config) Listen() {
 	c.SetupRoutes()
 
-	if err := c.Conn.Server.ListenAndServe(); err != nil {
-		log.Fatal("Fatal")
+	server := http.Server{
+		Addr:    fmt.Sprintf("%s:%s", c.IPv4, c.Port),
+		Handler: c.Framework.Conn,
+	}
+
+	logrus.Infof("listen server in: %s:%s", c.IPv4, c.Port)
+	if err := server.ListenAndServe(); err != http.ErrServerClosed {
+		logrus.Fatal(err)
 	}
 }

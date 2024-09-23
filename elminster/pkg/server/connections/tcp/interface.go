@@ -4,7 +4,7 @@ import "github.com/labstack/echo/v4"
 
 type Config struct {
 	IPv4      string
-	Port      int
+	Port      string
 	Framework *EchoConfig
 }
 

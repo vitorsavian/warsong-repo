@@ -4,6 +4,7 @@ import (
 	"sync"
 
 	"github.com/sirupsen/logrus"
+	"github.com/vitorsavian/warsong-repo/elminster/pkg/adapter"
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/infra/db"
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/repository"
 )
@@ -16,7 +17,7 @@ type CharacterController struct {
 
 var CharacterControllerStance *CharacterController
 
-func GetController() *CharacterController {
+func GetController() (*CharacterController, error) {
 	if CharacterControllerStance == nil {
 		lockCharacterController.Lock()
 		defer lockCharacterController.Unlock()
@@ -25,7 +26,8 @@ func GetController() *CharacterController {
 			databaseConfig := db.CreateConfig()
 			repo, err := databaseConfig.CreatePoolConnection()
 			if err != nil {
-				logrus.Panic("Panic for test")
+				logrus.Errorf("Error while creating the pool connection: %s", err.Error())
+				return nil, err
 			}
 
 			CharacterControllerStance = &CharacterController{
@@ -34,5 +36,9 @@ func GetController() *CharacterController {
 		}
 	}
 
-	return CharacterControllerStance
+	return CharacterControllerStance, nil
+}
+
+func (c *CharacterController) CreateCharacter(body *adapter.CharacterCreationRequestAdapter) error {
+	return nil
 }
