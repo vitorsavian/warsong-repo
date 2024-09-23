@@ -3,13 +3,14 @@ package db
 import (
 	"context"
 	"fmt"
+	"os"
 
 	"github.com/jackc/pgx/v5"
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/repository"
 )
 
 type DatabaseConfig struct {
-	Port int
+	Port string
 	IP   string
 
 	Login    string
@@ -20,7 +21,11 @@ type DatabaseConfig struct {
 
 func CreateConfig() *DatabaseConfig {
 	return &DatabaseConfig{
-		Login: "",
+		Login:    os.Getenv("DATABASE_USER"),
+		Password: os.Getenv("DATABASE_PASSWORD"),
+		Port:     os.Getenv("DATABASE_PORT"),
+		IP:       os.Getenv("DATABASE_IP"),
+		Database: os.Getenv("DATABASE"),
 	}
 }
 

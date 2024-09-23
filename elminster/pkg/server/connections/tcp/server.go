@@ -10,16 +10,15 @@ import (
 )
 
 func CreateCharacter(c echo.Context) error {
-	logrus.Panic("testing")
 	body := new(adapter.CharacterCreationRequestAdapter)
 	if err := c.Bind(body); err != nil {
+		logrus.Errorf("Error found in Create Character body bind: %s", err.Error())
 		return err
 	}
 
-	logrus.Panic(body)
-
 	controller, err := controllers.GetController()
 	if err != nil {
+		logrus.Panic()
 		return nil
 	}
 
