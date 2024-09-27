@@ -1,10 +1,12 @@
 package controllers
 
 import (
+	"net/http"
 	"sync"
 
 	"github.com/sirupsen/logrus"
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/adapter"
+	"github.com/vitorsavian/warsong-repo/elminster/pkg/domain"
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/infra/db"
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/repository"
 )
@@ -42,6 +44,20 @@ func GetController() (*CharacterController, error) {
 	return CharacterControllerStance, nil
 }
 
-func (c *CharacterController) CreateCharacter(body *adapter.CharacterCreationRequestAdapter) error {
-	return nil
+func (c *CharacterController) CreateCharacter(body *adapter.CharacterCreationRequestAdapter) (int, error) {
+	char, err := domain.CreateCharacter(body)
+	if err != nil {
+		return http.StatusBadRequest, err
+	}
+
+	if err = adapter.CheckCreateCharacterBody(body); err != nil {
+		return http.StatusBadRequest, err
+	}
+
+	err = c.CharacterRepo.CreateCharacter(char)
+	if err != nil {
+		return http.StatusInternalServerError, err
+	}
+
+	return http.StatusCreated, nil
 }

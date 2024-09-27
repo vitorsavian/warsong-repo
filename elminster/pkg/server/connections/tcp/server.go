@@ -22,7 +22,9 @@ func CreateCharacter(c echo.Context) error {
 		return nil
 	}
 
-	if err = controller.CreateCharacter(body); err != nil {
+	status, err := controller.CreateCharacter(body)
+	if err != nil {
+		c.JSON(status, "")
 		return nil
 	}
 
