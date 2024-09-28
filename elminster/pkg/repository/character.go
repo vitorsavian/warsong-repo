@@ -1,6 +1,8 @@
 package repository
 
 import (
+	"context"
+
 	"github.com/jackc/pgx/v5"
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/domain"
 )
@@ -9,8 +11,12 @@ type ConnectionClient struct {
 	Client *pgx.Conn
 }
 
-func (c *ConnectionClient) CreateCharacter(*domain.Character) error {
+var InsertCharacterSQL = `
+  INSERT INTO CHARACTERS(id, name, level) VALUES($1, $2, $3)
+`
 
+func (c *ConnectionClient) CreateCharacter(char *domain.Character) error {
+	c.Client.Exec(context.Background(), InsertCharacterSQL, char.Id, char.Name, char.Level)
 	return nil
 }
 
