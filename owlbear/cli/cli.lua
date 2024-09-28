@@ -1,3 +1,7 @@
+-- local character = require("character")
+-- local monster = require("monster")
+-- local npc = require("npc")
+
 function MainTitle()
 	print("")
 	print("--------------------------------------------------")
@@ -25,32 +29,38 @@ function Main(args)
 		return
 	end
 
-	if args[1] == "create" and args[2] == "character" then
-		local name = nil
-
-		for i = 3, #args do
-			if args[i] == "--name" then
-				if i + 1 <= #args then
-					name = args[i + 1]
-				else
-					print("Erro: --name requer um valor.")
-					return
-				end
-			elseif args[i] == "--help" then
-				MainHelp()
-				return
-			else
-				print("Erro: opção desconhecida " .. args[i])
-				return
-			end
-		end
-
-		if name then
-			print("Character and stuff")
-			-- create_character(name)
-		else
-			print("Erro: Nome do personagem não fornecido.")
-		end
+	if args[1] == "characer" then
+		CharacterHandler(args)
+		--   and args[2] == "character" then
+		-- local name = nil
+		--
+		-- for i = 3, #args do
+		-- 	if args[i] == "--name" then
+		-- 		if i + 1 <= #args then
+		-- 			name = args[i + 1]
+		-- 		else
+		-- 			print("Erro: --name requer um valor.")
+		-- 			return
+		-- 		end
+		-- 	elseif args[i] == "--help" then
+		-- 		MainHelp()
+		-- 		return
+		-- 	else
+		-- 		print("Erro: opção desconhecida " .. args[i])
+		-- 		return
+		-- 	end
+		-- end
+		--
+		-- if name then
+		-- 	print("Character and stuff")
+		-- 	-- create_character(name)
+		-- else
+		-- 	print("Erro: Nome do personagem não fornecido.")
+		-- end
+	elseif args[1] == "npc" then
+		NpcHandler(args)
+	elseif args[1] == "monster" then
+		MonsterHandler(args)
 	else
 		MainHelp()
 	end

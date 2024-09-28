@@ -40,3 +40,12 @@ function CharacterDeleteHelp()
 	print("OPTIONS:")
 	print("  --help     Show this message")
 end
+
+function CharacterHandler(args)
+	for i = 2, #args do
+		if args[i] == "--help" then
+			CharacterHelp()
+			return
+		end
+	end
+end

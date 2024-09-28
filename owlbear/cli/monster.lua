@@ -40,3 +40,12 @@ function MonsterDeleteHelp()
 	print("OPTIONS:")
 	print("  --help     Show this message")
 end
+
+function MonsterHandler(args)
+	for i = 2, #args do
+		if args[i] == "--help" then
+			MonsterHelp()
+			return
+		end
+	end
+end
