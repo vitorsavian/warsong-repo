@@ -1,4 +1,15 @@
+function MainTitle()
+	print("")
+	print("--------------------------------------------------")
+	print("OWLBEAR")
+	print("A cli app for handling dungeons and dragons stuff")
+	print("--------------------------------------------------")
+	print("")
+end
+
 function MainHelp()
+	MainTitle()
+
 	print("USAGE: owlbear [COMMAND] [OPTIONS]")
 	print("COMMAND:")
 	print("  character   character command")

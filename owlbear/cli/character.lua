@@ -9,7 +9,34 @@ function CharacterHelp()
 	print("  --help     Show this message")
 end
 
-function CharacterCreateHelp() end
-function CharacterUpdateHelp() end
-function CharacterGetHelp() end
-function CharacterDeleteHelp() end
+function CharacterCreateHelp()
+	print("Usage: owlbear character create [OPTIONS]")
+	print("COMMAND:")
+	print("")
+	print("OPTIONS:")
+	print("  --help     Show this message")
+end
+
+function CharacterUpdateHelp()
+	print("Usage: owlbear character update [OPTIONS]")
+	print("COMMAND:")
+	print("")
+	print("OPTIONS:")
+	print("  --help     Show this message")
+end
+
+function CharacterGetHelp()
+	print("Usage: owlbear character get [OPTIONS]")
+	print("COMMAND:")
+	print("")
+	print("OPTIONS:")
+	print("  --help     Show this message")
+end
+
+function CharacterDeleteHelp()
+	print("Usage: owlbear character delete [OPTIONS]")
+	print("COMMAND:")
+	print("")
+	print("OPTIONS:")
+	print("  --help     Show this message")
+end
