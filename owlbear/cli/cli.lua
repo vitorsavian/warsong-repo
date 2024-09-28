@@ -8,37 +8,9 @@ function MainHelp()
 	print("  --help      show this message")
 end
 
--- TODO: rewrite the entire character and monster help to match the commands that I want
-function CharacterHelp()
-	print("Usage: owlbear character [COMMAND] [OPTIONS]")
-	print("COMMAND:")
-	print("  create     Create character")
-	print("  update     Update character")
-	print("  get        Get character")
-	print("  delete     Delete character")
-end
-
-function NpcHelp()
-	print("Usage: owlbear npc [COMMAND] [OPTIONS]")
-	print("COMMAND:")
-	print("  create     Create npc")
-	print("  update     Update npc")
-	print("  get        Get npc")
-	print("  delete     Delete npc")
-end
-
-function MonsterHelp()
-	print("USAGE: owlbear monster [COMMAND] [OPTIONS]")
-	print("COMMAND:")
-	print("  create     Create monster")
-	print("  update     Update monster")
-	print("  get        Get monster")
-	print("  delete     Delete monster")
-end
-
 function Main(args)
 	if #args < 1 then
-		Print_main_help()
+		MainHelp()
 		return
 	end
 
@@ -54,7 +26,7 @@ function Main(args)
 					return
 				end
 			elseif args[i] == "--help" then
-				Print_help()
+				MainHelp()
 				return
 			else
 				print("Erro: opção desconhecida " .. args[i])
@@ -69,7 +41,7 @@ function Main(args)
 			print("Erro: Nome do personagem não fornecido.")
 		end
 	else
-		Print_main_help()
+		MainHelp()
 	end
 end
 
