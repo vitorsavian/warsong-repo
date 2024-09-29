@@ -42,10 +42,34 @@ function CharacterDeleteHelp()
 end
 
 function CharacterHandler(args)
-	for i = 2, #args do
+	local arguments = {}
+
+	for i = 3, #args do
 		if args[i] == "--help" then
 			CharacterHelp()
 			return
 		end
+
+		print("Getting all the things")
+
+		if arg == "--name" then
+			arguments.name = args[i + 1]
+		elseif arg == "--level" then
+			arguments.level = args[i + 1]
+		elseif arg == "--str" then
+			arguments.str = args[i + 1]
+		elseif arg == "--dex" then
+			arguments.dex = args[i + 1]
+		elseif arg == "--con" then
+			arguments.con = args[i + 1]
+		elseif arg == "--int" then
+			arguments.int = args[i + 1]
+		elseif arg == "--char" then
+			arguments.char = args[i + 1]
+		elseif arg == "--wil" then
+			arguments.wil = args[i + 1]
+		end
 	end
+
+	return arguments
 end
