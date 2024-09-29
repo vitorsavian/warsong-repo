@@ -61,3 +61,15 @@ func (c *CharacterController) CreateCharacter(body *adapter.CharacterCreationReq
 
 	return http.StatusCreated, nil
 }
+
+func (c *CharacterController) UpdateCharacter(body *adapter.CharacterUpdateRequestAdapter) (int, error) {
+	return http.StatusNoContent, nil
+}
+
+func (c *CharacterController) DeleteCharacter() (int, error) {
+	return http.StatusNoContent, nil
+}
+
+func (c *CharacterController) GetCharacter() (int, error) {
+	return http.StatusFound, nil
+}
