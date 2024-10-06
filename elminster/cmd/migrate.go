@@ -1,12 +1,14 @@
 /*
 Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
 
+	"github.com/golang-migrate/migrate/v4"
+	_ "github.com/golang-migrate/migrate/v4/database/postgres"
+	_ "github.com/golang-migrate/migrate/v4/source/github"
 	"github.com/spf13/cobra"
 )
 
@@ -22,6 +24,11 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("migrate called")
+
+		m, _ := migrate.New(
+			"github://mattes:personal-access-token@mattes/migrate_test",
+			"postgres://localhost:5432/database?sslmode=enable")
+		m.Steps(2)
 	},
 }
 
