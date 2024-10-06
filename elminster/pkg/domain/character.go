@@ -33,7 +33,7 @@ type Feat struct {
 
 func CreateCharacter(body *adapter.CharacterCreationRequestAdapter) (*Character, error) {
 	newCharacter := &Character{
-		Id:    "test",
+		Id:    body.Id,
 		Level: body.Level,
 		Name:  body.Name,
 		Str:   body.Stats.Str,

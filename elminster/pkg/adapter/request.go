@@ -1,8 +1,12 @@
 package adapter
 
-import "errors"
+import (
+	"errors"
+	"github.com/google/uuid"
+)
 
 type CharacterCreationRequestAdapter struct {
+	Id    string
 	Level int8   `json:"level"`
 	Name  string `json:"name"`
 
@@ -30,6 +34,8 @@ func CheckCreateCharacterBody(body *CharacterCreationRequestAdapter) error {
 	if body.Stats.Str < 0 || body.Stats.Dex < 0 || body.Stats.Con < 0 || body.Stats.Cha < 0 || body.Stats.Wil < 0 || body.Stats.Int < 0 {
 		return errors.New("stats for the character are negative")
 	}
+
+	body.Id = uuid.Must(uuid.NewRandom()).String()
 
 	return nil
 }
