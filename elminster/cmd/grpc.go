@@ -1,13 +1,19 @@
 /*
 Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
+	"log"
+	"net"
 
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"github.com/vitorsavian/warsong-repo/elminster/pkg/server/connections/grpc"
+	"github.com/vitorsavian/warsong-repo/elminster/pkg/server/connections/grpc/proto"
+	gRPC "google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 // grpcCmd represents the grpc command
@@ -22,6 +28,25 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("grpc called")
+
+		lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 3432))
+		if err != nil {
+			logrus.Fatalf("failed to listen: %v", err)
+		}
+
+		fmt.Printf("server listening at %v\n", lis.Addr())
+
+		var opts []gRPC.ServerOption
+
+		s := gRPC.NewServer(opts...)
+
+		proto.RegisterCharacterServer(s, grpc.NewServer())
+
+		reflection.Register(s)
+
+		if err := s.Serve(lis); err != nil {
+			log.Fatalf("failed to serve: %v", err)
+		}
 	},
 }
 

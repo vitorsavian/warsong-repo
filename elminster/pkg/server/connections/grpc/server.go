@@ -3,15 +3,19 @@ package grpc
 import (
 	"context"
 
-	"github.com/vitorsavian/warsong-repo/elminster/pkg/server/connections/grpc/proto"
+	"github.com/vitorsavian/warsong-repo/elminster/pkg/server/connections/grpc/pb"
 )
 
-type Server struct {
-	proto.UnimplementedCharacterServer
+type server struct {
+	pb.UnimplementedCharacterServer
 }
 
-func (s *Server) CreateCharacter(_ context.Context, chracter *proto.CreateCharacterRequest) (*proto.CreateCharacterResponse, error) {
-	return &proto.CreateCharacterResponse{
+func NewServer() *server {
+	return &server{}
+}
+
+func (s *server) CreateCharacter(_ context.Context, chracter *pb.CreateCharacterRequest) (*pb.CreateCharacterResponse, error) {
+	return &pb.CreateCharacterResponse{
 		Message: "Created",
 	}, nil
 }
