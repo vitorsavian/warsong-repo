@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	Character_CreateCharacter_FullMethodName = "/pb.Character/CreateCharacter"
+	Character_UpdateCharacter_FullMethodName = "/pb.Character/UpdateCharacter"
 )
 
 // CharacterClient is the client API for Character service.
@@ -29,6 +30,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CharacterClient interface {
 	CreateCharacter(ctx context.Context, in *CreateCharacterRequest, opts ...grpc.CallOption) (*CreateCharacterResponse, error)
+	UpdateCharacter(ctx context.Context, in *UpdateCharacterRequest, opts ...grpc.CallOption) (*UpdateCharacterResponse, error)
 }
 
 type characterClient struct {
@@ -49,11 +51,22 @@ func (c *characterClient) CreateCharacter(ctx context.Context, in *CreateCharact
 	return out, nil
 }
 
+func (c *characterClient) UpdateCharacter(ctx context.Context, in *UpdateCharacterRequest, opts ...grpc.CallOption) (*UpdateCharacterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateCharacterResponse)
+	err := c.cc.Invoke(ctx, Character_UpdateCharacter_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CharacterServer is the server API for Character service.
 // All implementations must embed UnimplementedCharacterServer
 // for forward compatibility.
 type CharacterServer interface {
 	CreateCharacter(context.Context, *CreateCharacterRequest) (*CreateCharacterResponse, error)
+	UpdateCharacter(context.Context, *UpdateCharacterRequest) (*UpdateCharacterResponse, error)
 	mustEmbedUnimplementedCharacterServer()
 }
 
@@ -66,6 +79,9 @@ type UnimplementedCharacterServer struct{}
 
 func (UnimplementedCharacterServer) CreateCharacter(context.Context, *CreateCharacterRequest) (*CreateCharacterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCharacter not implemented")
+}
+func (UnimplementedCharacterServer) UpdateCharacter(context.Context, *UpdateCharacterRequest) (*UpdateCharacterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCharacter not implemented")
 }
 func (UnimplementedCharacterServer) mustEmbedUnimplementedCharacterServer() {}
 func (UnimplementedCharacterServer) testEmbeddedByValue()                   {}
@@ -106,6 +122,24 @@ func _Character_CreateCharacter_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Character_UpdateCharacter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCharacterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CharacterServer).UpdateCharacter(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Character_UpdateCharacter_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CharacterServer).UpdateCharacter(ctx, req.(*UpdateCharacterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Character_ServiceDesc is the grpc.ServiceDesc for Character service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -116,6 +150,10 @@ var Character_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateCharacter",
 			Handler:    _Character_CreateCharacter_Handler,
+		},
+		{
+			MethodName: "UpdateCharacter",
+			Handler:    _Character_UpdateCharacter_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
