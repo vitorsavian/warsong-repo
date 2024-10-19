@@ -1,0 +1,21 @@
+// The greeting service definition.
+
+syntax = "proto3";
+
+option go_package = "github.com/vitorsavian/warsong-repo/elminster/pkg/server/connections/grpc/pb";
+
+package pb;
+
+service Weapon {
+  rpc CreateWeapon (CreateWeaponRequest) returns (CreateWeaponResponse) {}
+}
+
+// The request message containing the user's name.
+message CreateWeaponRequest {
+  string message = 1;
+}
+
+// The response message containing the greetings
+message CreateWeaponResponse {
+  string message = 1;
+}

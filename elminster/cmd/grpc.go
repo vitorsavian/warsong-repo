@@ -11,7 +11,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/server/connections/grpc"
-	"github.com/vitorsavian/warsong-repo/elminster/pkg/server/connections/grpc/proto"
+	"github.com/vitorsavian/warsong-repo/elminster/pkg/server/connections/grpc/pb"
 	gRPC "google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -40,7 +40,7 @@ to quickly create a Cobra application.`,
 
 		s := gRPC.NewServer(opts...)
 
-		proto.RegisterCharacterServer(s, grpc.NewServer())
+		pb.RegisterCharacterServer(s, grpc.NewServer())
 
 		reflection.Register(s)
 
