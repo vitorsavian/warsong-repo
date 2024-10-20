@@ -26,7 +26,7 @@ func NewServer() *server {
 	}
 }
 
-func (s *server) Ping(_ context.Context, ping *pb.PingRequest) (*pb.PingResponse, error) {
+func (s *server) PingServer(_ context.Context, ping *pb.PingRequest) (*pb.PingResponse, error) {
 	return &pb.PingResponse{
 		Ping: 1,
 	}, nil

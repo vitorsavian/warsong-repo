@@ -10,6 +10,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	environment "github.com/vitorsavian/warsong-repo/elminster/pkg/infra/env"
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/server/connections/grpc"
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/server/connections/grpc/pb"
 	gRPC "google.golang.org/grpc"
@@ -29,6 +30,8 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("grpc called")
 
+		environment.SetEnv("dev")
+
 		lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 3432))
 		if err != nil {
 			logrus.Fatalf("failed to listen: %v", err)
@@ -40,7 +43,10 @@ to quickly create a Cobra application.`,
 
 		s := gRPC.NewServer(opts...)
 
-		pb.RegisterCharacterServer(s, grpc.NewServer())
+		server := grpc.NewServer()
+
+		pb.RegisterCharacterServer(s, server)
+		pb.RegisterPingServer(s, server)
 
 		reflection.Register(s)
 
