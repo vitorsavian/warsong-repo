@@ -63,6 +63,7 @@ func (c *CharacterController) CreateCharacter(body *adapter.CharacterCreationReq
 }
 
 func (c *CharacterController) UpdateCharacter(body *adapter.CharacterUpdateRequestAdapter) (int, error) {
+
 	return http.StatusNoContent, nil
 }
 
