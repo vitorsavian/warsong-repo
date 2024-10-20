@@ -2,7 +2,7 @@ clean:
 	rm -f elminster
 
 build:
-	go build -o elminster
+	go build -o ./dist/elminster
 
 rest: clean build
 	./elminster server

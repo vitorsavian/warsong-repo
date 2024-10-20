@@ -424,3 +424,5 @@ zig-cache/
 vendor
 
 .env
+
+dist/
