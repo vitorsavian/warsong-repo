@@ -1,14 +1,14 @@
 clean:
-	rm -f elminster
+	rm -f ./dist/elminster
 
 build:
 	go build -o ./dist/elminster
 
 rest: clean build
-	./elminster server
+	./dist/elminster server
 
 grpc: clean build
-	./elminster grpc
+	./dist/elminster grpc
 
 generate:
 	protoc --go_out=. --go_opt=paths=source_relative \
