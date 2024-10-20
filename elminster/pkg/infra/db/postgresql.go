@@ -30,7 +30,7 @@ func CreateConfig() *DatabaseConfig {
 }
 
 func (d *DatabaseConfig) CreateURL() string {
-	return fmt.Sprintf("postgresql://%s:%s@%s/%s", d.Login, d.Password, d.IP, d.Database)
+	return fmt.Sprintf("postgresql://%s:%s@%s/%s?sslmode=disable", d.Login, d.Password, d.IP, d.Database)
 }
 
 func (d *DatabaseConfig) CreatePoolConnection() (*repository.ConnectionClient, error) {

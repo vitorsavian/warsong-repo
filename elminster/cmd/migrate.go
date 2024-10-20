@@ -5,11 +5,16 @@ package cmd
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
 
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
-	_ "github.com/golang-migrate/migrate/v4/source/github"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"github.com/vitorsavian/warsong-repo/elminster/pkg/infra/db"
+	environment "github.com/vitorsavian/warsong-repo/elminster/pkg/infra/env"
 )
 
 // migrateCmd represents the migrate command
@@ -25,10 +30,33 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("migrate called")
 
-		m, _ := migrate.New(
-			"github://mattes:personal-access-token@mattes/migrate_test",
-			"postgres://localhost:5432/database?sslmode=enable")
-		m.Steps(2)
+		environment.SetEnv("dev")
+
+		origin, err := os.Getwd()
+		if err != nil {
+			logrus.Fatalf("Error encountered while getting main directory: %v", err)
+		}
+
+		m, err := migrate.New(
+			fmt.Sprintf("%s%s", "file://", filepath.Join(origin, "pkg", "infra", "migrations")),
+			db.CreateConfig().CreateURL())
+
+		if err != nil {
+			logrus.Fatal(err)
+		}
+
+		down := cmd.Flags().Changed("down")
+
+		if down {
+			if err := m.Down(); err != nil {
+				logrus.Fatal(err)
+			}
+			return
+		}
+
+		if err := m.Up(); err != nil {
+			logrus.Fatal(err)
+		}
 	},
 }
 
@@ -44,4 +72,6 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// migrateCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	migrateCmd.Flags().BoolP("down", "d", true, "down migrations")
 }

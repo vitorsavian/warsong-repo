@@ -10,6 +10,12 @@ rest: clean build
 grpc: clean build
 	./dist/elminster grpc
 
+migrate: clean build
+	./dist/elminster migrate
+
+migrate-down: clean build
+	./dist/elminster migrate --down
+
 generate:
 	protoc --go_out=. --go_opt=paths=source_relative \
     --go-grpc_out=. --go-grpc_opt=paths=source_relative \
