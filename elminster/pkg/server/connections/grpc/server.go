@@ -12,6 +12,8 @@ import (
 
 type server struct {
 	pb.UnimplementedCharacterServer
+	pb.UnimplementedPingServer
+	pb.UnimplementedWeaponServer
 	characterController *controllers.CharacterController
 }
 
@@ -24,6 +26,12 @@ func NewServer() *server {
 	return &server{
 		characterController: characterController,
 	}
+}
+
+func (s *server) Ping(_ context.Context, ping *pb.PingRequest) (*pb.PingResponse, error) {
+	return &pb.PingResponse{
+		Ping: 1,
+	}, nil
 }
 
 func (s *server) CreateCharacter(_ context.Context, character *pb.CreateCharacterRequest) (*pb.CreateCharacterResponse, error) {
@@ -50,5 +58,11 @@ func (s *server) CreateCharacter(_ context.Context, character *pb.CreateCharacte
 
 	return &pb.CreateCharacterResponse{
 		Message: "Created",
+	}, nil
+}
+
+func (s *server) UpdateCharacter(_ context.Context, update *pb.UpdateCharacterRequest) (*pb.UpdateCharacterResponse, error) {
+	return &pb.UpdateCharacterResponse{
+		Message: "Updated",
 	}, nil
 }
