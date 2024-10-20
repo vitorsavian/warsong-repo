@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "github.com/vitorsavian/warsong-repo/elminster/pkg/server/connections/grpc/pb";
+
+package pb;
+
+service Ping {
+  rpc PingServer (PingRequest) returns (PingResponse) {}
+}
+
+message PingRequest { 
+    int32 ping = 1;
+}
+
+message PingResponse {
+    int32 ping = 1;
+}

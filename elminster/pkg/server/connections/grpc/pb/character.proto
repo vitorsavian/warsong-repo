@@ -16,7 +16,7 @@ message Stats {
   int32 dex = 2;
   int32 con = 3;
   int32 int = 4;
-  int32 char = 5;
+  int32 cha = 5;
   int32 wil = 6;
 }
 

@@ -30,7 +30,7 @@ func GetController() (*CharacterController, error) {
 			databaseConfig := db.CreateConfig()
 			repo, err := databaseConfig.CreatePoolConnection()
 			if err != nil {
-				logrus.Errorf("Error while creating the pool connection: %s", err.Error())
+				logrus.Errorf("Failed while creating the pool connection: %v", err)
 				return nil, err
 			}
 
