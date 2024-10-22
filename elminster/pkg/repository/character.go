@@ -12,12 +12,19 @@ type ConnectionClient struct {
 }
 
 var InsertCharacterSQL = `
-  INSERT INTO CHARACTERS(id, name, level) VALUES($1, $2, $3)
+	BEGIN TRANSACTION
+   		INSERT INTO characters(id, name, level, id_stats) VALUES($1, $2, $3, $4)
+   		INSERT INTO stats(id, hp, sp, str, dex, con, inte, wil, cha, sanity, courage) VALUES($4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15);
+	COMMIT;
 `
 
-func (c *ConnectionClient) CreateCharacter(char *domain.Character) error {
-	c.Client.Exec(context.Background(), InsertCharacterSQL, char.Id, char.Name, char.Level)
-	return nil
+func (c *ConnectionClient) CreateCharacter(char *domain.Character) error { 
+	c.Client.Exec(context.Background(), InsertCharacterSQL, char.Id, char.Name, char.Level,
+				char.Id, char.HP, char.SP, char.Str,
+				char.Dex, char.Con, char.Int, char.Wil, 
+				char.Cha, char.Sanity, char.Courage,
+			)
+	return nil  
 }
 
 func (c *ConnectionClient) DeleteCharacter() {

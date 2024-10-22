@@ -4,6 +4,7 @@ import (
 	"log"
 
 	amqp "github.com/rabbitmq/amqp091-go"
+	"github.com/sirupsen/logrus"
 )
 
 type Client struct {
@@ -19,8 +20,12 @@ func failOnError(err error, msg string) {
 	}
 }
 
-func Pub() {
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
-	failOnError(err, "Failed to connect to RabbitMQ")
-	defer conn.Close()
+func CreateConnection() (*amqp.Connection, error) {
+	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672")
+	if err != nil {
+		logrus.Errorf("Failed to create connection with rabbitmq: %v", err)
+		return nil, err
+	}
+
+	return conn, nil
 }
