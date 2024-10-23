@@ -15,7 +15,7 @@ func Run(msgs <-chan amqp.Delivery) bool {
 	return true
 }
 
-func Pub() error {
+func Sub() error {
 	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672")
 	if err != nil {
 		logrus.Errorf("Failed to create connection with rabbitmq: %v", err)
@@ -56,5 +56,5 @@ func Pub() error {
 
 	logrus.Info("Retrying connection")
 
-	return Pub()
+	return Sub()
 }
