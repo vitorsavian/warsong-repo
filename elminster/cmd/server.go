@@ -21,7 +21,7 @@ var serverCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("initianting tcp server")
 
-		env, _ := cmd.Flags().GetString("term")
+		env, _ := cmd.Flags().GetString("env")
 
 		environment.SetEnv(env)
 		config, err := tcp.ConfigServer()

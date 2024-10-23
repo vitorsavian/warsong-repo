@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/jackc/pgx/v5"
+	"github.com/sirupsen/logrus"
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/domain"
 )
 
@@ -18,13 +19,17 @@ var InsertCharacterSQL = `
 	COMMIT;
 `
 
-func (c *ConnectionClient) CreateCharacter(char *domain.Character) error { 
-	c.Client.Exec(context.Background(), InsertCharacterSQL, char.Id, char.Name, char.Level,
-				char.Id, char.HP, char.SP, char.Str,
-				char.Dex, char.Con, char.Int, char.Wil, 
-				char.Cha, char.Sanity, char.Courage,
-			)
-	return nil  
+func (c *ConnectionClient) CreateCharacter(char *domain.Character) error {
+	if _, err := c.Client.Query(context.Background(), InsertCharacterSQL, char.Id, char.Name, char.Level,
+		char.Id, char.HP, char.SP, char.Str,
+		char.Dex, char.Con, char.Int, char.Wil,
+		char.Cha, char.Sanity, char.Courage,
+	); err != nil {
+		logrus.Errorf("Failed to exec query for create character: %v", err)
+		return err
+	}
+
+	return nil
 }
 
 func (c *ConnectionClient) DeleteCharacter() {

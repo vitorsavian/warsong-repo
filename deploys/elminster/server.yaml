@@ -1,0 +1,26 @@
+apiVersion: 1
+kind: Pod
+
+metadata:
+  name: elminster
+  labels:
+    purpose: restapi
+
+spec:
+  containers:
+  - name: elminster-rest-container
+    image: "image here"
+
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 80
+        httpHeaders:
+        - name: Custom-Header
+          value: awesome
+      initialDelaySeconds: 5
+      periodSeconds: 5
+
+    env:
+    - name: DATABASE
+      value: "TEST"
