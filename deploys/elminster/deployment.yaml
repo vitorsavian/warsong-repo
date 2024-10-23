@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elminster-deployment
+
+spec:
+  selector:
+    matchLabels:
+      app: elminster-rest
+    replicas: 3
