@@ -63,14 +63,22 @@ func (c *CharacterController) CreateCharacter(body *adapter.CharacterCreationReq
 }
 
 func (c *CharacterController) UpdateCharacter(body *adapter.CharacterUpdateRequestAdapter) (int, error) {
-
 	return http.StatusNoContent, nil
 }
 
-func (c *CharacterController) DeleteCharacter() (int, error) {
+func (c *CharacterController) DeleteCharacter(id string) (int, error) {
+	// if err := c.CharacterRepo.DeleteCharacter(); err != nil {
+	// 	return http.StatusInternalServerError, err
+	// }
+	//
 	return http.StatusNoContent, nil
 }
 
-func (c *CharacterController) GetCharacter() (int, error) {
-	return http.StatusFound, nil
+func (c *CharacterController) GetCharacter(id string) (*domain.Character, int, error) {
+	character, err := c.CharacterRepo.GetCharacter(id)
+	if err != nil {
+		return nil, http.StatusInternalServerError, err
+	}
+
+	return character, http.StatusFound, nil
 }

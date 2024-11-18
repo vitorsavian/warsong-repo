@@ -24,7 +24,7 @@ func CreateCharacter(c echo.Context) error {
 
 	status, err := controller.CreateCharacter(body)
 	if err != nil {
-		c.JSON(status, "")
+		c.JSON(status, err)
 		return nil
 	}
 
@@ -33,25 +33,21 @@ func CreateCharacter(c echo.Context) error {
 }
 
 func GetCharacter(c echo.Context) error {
-	body := new(adapter.CharacterCreationRequestAdapter)
-	if err := c.Bind(body); err != nil {
-		logrus.Errorf("Error found in Create Character body bind: %s", err.Error())
-		return err
-	}
-
 	controller, err := controllers.GetController()
 	if err != nil {
 		logrus.Panicf("Error found while creating the controller: %s", err.Error())
 		return nil
 	}
 
-	status, err := controller.CreateCharacter(body)
+	id := c.Param("id")
+
+	character, status, err := controller.GetCharacter(id)
 	if err != nil {
-		c.JSON(status, "")
+		c.JSON(status, err)
 		return nil
 	}
 
-	c.JSON(http.StatusCreated, "")
+	c.JSON(http.StatusCreated, character)
 	return nil
 }
 

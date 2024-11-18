@@ -1,6 +1,9 @@
 package domain
 
-import "github.com/vitorsavian/warsong-repo/elminster/pkg/adapter"
+import (
+	"github.com/google/uuid"
+	"github.com/vitorsavian/warsong-repo/elminster/pkg/adapter"
+)
 
 type Character struct {
 	Id    string
@@ -33,7 +36,7 @@ type Feat struct {
 
 func CreateCharacter(body *adapter.CharacterCreationRequestAdapter) (*Character, error) {
 	newCharacter := &Character{
-		Id:    body.Id,
+		Id:    uuid.New().String(),
 		Level: body.Level,
 		Name:  body.Name,
 		Str:   body.Stats.Str,
