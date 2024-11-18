@@ -9,6 +9,8 @@ package pb;
 service Character {
   rpc CreateCharacter (CreateCharacterRequest) returns (CreateCharacterResponse) {}
   rpc UpdateCharacter (UpdateCharacterRequest) returns (UpdateCharacterResponse) {}
+  rpc GetCharacter    (GetCharacterRequest) returns (GetCharacterResponse) {}
+  rpc DeleteCharacter (DeleteCharacterRequest) returns (DeleteCharacterResponse) {}
 }
 
 message Stats {
@@ -29,17 +31,36 @@ message CreateCharacterRequest {
 
 // The response message containing the greetings
 message CreateCharacterResponse {
-  string message = 1;
+  string response = 1;
 }
 
 // The request message containing the user's name.
 message UpdateCharacterRequest {
+  string id = 1;
+  string name = 2;
+  Stats stats = 3;
+  int32 level = 4;
+}
+
+// The response message containing the greetings
+message UpdateCharacterResponse {
+  string response = 1;
+}
+
+message GetCharacterRequest {
+  string id = 1;
+}
+
+message GetCharacterResponse {
   string name = 1;
   Stats stats = 2;
   int32 level = 3;
 }
 
-// The response message containing the greetings
-message UpdateCharacterResponse {
-  string message = 1;
+message DeleteCharacterRequest {
+  string id = 1;
+}
+
+message DeleteCharacterResponse {
+  string response = 1;
 }

@@ -60,7 +60,8 @@ func (c *Character) LevelUp() {
 }
 
 func (c *Character) Rest() {
-
+	c.CurrentHP = c.HP
+	c.CurrentSP = c.SP
 }
 
 func (c *Character) SetHP() {

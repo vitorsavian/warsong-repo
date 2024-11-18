@@ -26,17 +26,25 @@ func (s *server) CreateCharacter(_ context.Context, character *pb.CreateCharacte
 
 	if _, err := s.characterController.CreateCharacter(body); err != nil {
 		return &pb.CreateCharacterResponse{
-			Message: fmt.Sprintf("%v", err),
+			Response: fmt.Sprintf("%v", err),
 		}, nil
 	}
 
 	return &pb.CreateCharacterResponse{
-		Message: "Created",
+		Response: "Created",
 	}, nil
 }
 
 func (s *server) UpdateCharacter(_ context.Context, update *pb.UpdateCharacterRequest) (*pb.UpdateCharacterResponse, error) {
 	return &pb.UpdateCharacterResponse{
-		Message: "Updated",
+		Response: "Updated",
 	}, nil
+}
+
+func (s *server) DeleteCharacter() {
+
+}
+
+func (s *server) GetCharacter() {
+
 }

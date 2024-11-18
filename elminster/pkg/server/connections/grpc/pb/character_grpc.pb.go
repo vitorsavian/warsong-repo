@@ -23,6 +23,8 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	Character_CreateCharacter_FullMethodName = "/pb.Character/CreateCharacter"
 	Character_UpdateCharacter_FullMethodName = "/pb.Character/UpdateCharacter"
+	Character_GetCharacter_FullMethodName    = "/pb.Character/GetCharacter"
+	Character_DeleteCharacter_FullMethodName = "/pb.Character/DeleteCharacter"
 )
 
 // CharacterClient is the client API for Character service.
@@ -31,6 +33,8 @@ const (
 type CharacterClient interface {
 	CreateCharacter(ctx context.Context, in *CreateCharacterRequest, opts ...grpc.CallOption) (*CreateCharacterResponse, error)
 	UpdateCharacter(ctx context.Context, in *UpdateCharacterRequest, opts ...grpc.CallOption) (*UpdateCharacterResponse, error)
+	GetCharacter(ctx context.Context, in *GetCharacterRequest, opts ...grpc.CallOption) (*GetCharacterResponse, error)
+	DeleteCharacter(ctx context.Context, in *DeleteCharacterRequest, opts ...grpc.CallOption) (*DeleteCharacterResponse, error)
 }
 
 type characterClient struct {
@@ -61,12 +65,34 @@ func (c *characterClient) UpdateCharacter(ctx context.Context, in *UpdateCharact
 	return out, nil
 }
 
+func (c *characterClient) GetCharacter(ctx context.Context, in *GetCharacterRequest, opts ...grpc.CallOption) (*GetCharacterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCharacterResponse)
+	err := c.cc.Invoke(ctx, Character_GetCharacter_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *characterClient) DeleteCharacter(ctx context.Context, in *DeleteCharacterRequest, opts ...grpc.CallOption) (*DeleteCharacterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteCharacterResponse)
+	err := c.cc.Invoke(ctx, Character_DeleteCharacter_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CharacterServer is the server API for Character service.
 // All implementations must embed UnimplementedCharacterServer
 // for forward compatibility.
 type CharacterServer interface {
 	CreateCharacter(context.Context, *CreateCharacterRequest) (*CreateCharacterResponse, error)
 	UpdateCharacter(context.Context, *UpdateCharacterRequest) (*UpdateCharacterResponse, error)
+	GetCharacter(context.Context, *GetCharacterRequest) (*GetCharacterResponse, error)
+	DeleteCharacter(context.Context, *DeleteCharacterRequest) (*DeleteCharacterResponse, error)
 	mustEmbedUnimplementedCharacterServer()
 }
 
@@ -82,6 +108,12 @@ func (UnimplementedCharacterServer) CreateCharacter(context.Context, *CreateChar
 }
 func (UnimplementedCharacterServer) UpdateCharacter(context.Context, *UpdateCharacterRequest) (*UpdateCharacterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCharacter not implemented")
+}
+func (UnimplementedCharacterServer) GetCharacter(context.Context, *GetCharacterRequest) (*GetCharacterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCharacter not implemented")
+}
+func (UnimplementedCharacterServer) DeleteCharacter(context.Context, *DeleteCharacterRequest) (*DeleteCharacterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCharacter not implemented")
 }
 func (UnimplementedCharacterServer) mustEmbedUnimplementedCharacterServer() {}
 func (UnimplementedCharacterServer) testEmbeddedByValue()                   {}
@@ -140,6 +172,42 @@ func _Character_UpdateCharacter_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Character_GetCharacter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCharacterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CharacterServer).GetCharacter(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Character_GetCharacter_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CharacterServer).GetCharacter(ctx, req.(*GetCharacterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Character_DeleteCharacter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCharacterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CharacterServer).DeleteCharacter(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Character_DeleteCharacter_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CharacterServer).DeleteCharacter(ctx, req.(*DeleteCharacterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Character_ServiceDesc is the grpc.ServiceDesc for Character service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -154,6 +222,14 @@ var Character_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateCharacter",
 			Handler:    _Character_UpdateCharacter_Handler,
+		},
+		{
+			MethodName: "GetCharacter",
+			Handler:    _Character_GetCharacter_Handler,
+		},
+		{
+			MethodName: "DeleteCharacter",
+			Handler:    _Character_DeleteCharacter_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
