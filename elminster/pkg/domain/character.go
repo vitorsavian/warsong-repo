@@ -29,11 +29,6 @@ type Character struct {
 	Feat []Feat
 }
 
-type Feat struct {
-	Name        string
-	Description string
-}
-
 func CreateCharacter(body *adapter.CharacterCreationRequestAdapter) (*Character, error) {
 	newCharacter := &Character{
 		Id:    uuid.New().String(),
