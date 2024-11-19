@@ -49,8 +49,31 @@ func CreateCharacter(body *adapter.CharacterCreationRequestAdapter) (*Character,
 
 	newCharacter.SetHP()
 	newCharacter.SetSP()
+	newCharacter.SetSanity()
+	newCharacter.SetCourage()
 
 	return newCharacter, nil
+}
+
+func UpdateCharacter(body *adapter.CharacterUpdateRequestAdapter) (*Character, error) {
+	character := &Character{
+		Id:    body.Id,
+		Level: body.Level,
+		Name:  body.Name,
+		Str:   body.Stats.Str,
+		Dex:   body.Stats.Dex,
+		Con:   body.Stats.Con,
+		Cha:   body.Stats.Cha,
+		Int:   body.Stats.Int,
+		Wil:   body.Stats.Wil,
+	}
+
+	character.SetHP()
+	character.SetSP()
+	character.SetCourage()
+	character.SetSanity()
+
+	return character, nil
 }
 
 func (c *Character) LevelUp() {

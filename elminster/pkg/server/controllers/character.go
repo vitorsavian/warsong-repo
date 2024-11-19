@@ -30,7 +30,7 @@ func GetController() (*CharacterController, error) {
 			databaseConfig := db.CreateConfig()
 			repo, err := databaseConfig.CreatePoolConnection()
 			if err != nil {
-				logrus.Errorf("Failed while creating the pool connection: %v", err)
+				logrus.Errorf("Unable to create pool connection: %v", err)
 				return nil, err
 			}
 
@@ -45,12 +45,12 @@ func GetController() (*CharacterController, error) {
 }
 
 func (c *CharacterController) CreateCharacter(body *adapter.CharacterCreationRequestAdapter) (int, error) {
-	char, err := domain.CreateCharacter(body)
-	if err != nil {
+	if err := adapter.CheckCreateBody(body); err != nil {
 		return http.StatusBadRequest, err
 	}
 
-	if err = adapter.CheckCreateCharacterBody(body); err != nil {
+	char, err := domain.CreateCharacter(body)
+	if err != nil {
 		return http.StatusBadRequest, err
 	}
 
@@ -63,14 +63,26 @@ func (c *CharacterController) CreateCharacter(body *adapter.CharacterCreationReq
 }
 
 func (c *CharacterController) UpdateCharacter(body *adapter.CharacterUpdateRequestAdapter) (int, error) {
+	if err := adapter.CheckUpdateBody(body); err != nil {
+		return http.StatusBadRequest, err
+	}
+
+	char, err := domain.UpdateCharacter(body)
+	if err != nil {
+		return http.StatusBadRequest, err
+	}
+
+	if err := c.CharacterRepo.UpdateCharacter(char); err != nil {
+		return http.StatusInternalServerError, err
+	}
 	return http.StatusNoContent, nil
 }
 
 func (c *CharacterController) DeleteCharacter(id string) (int, error) {
-	// if err := c.CharacterRepo.DeleteCharacter(); err != nil {
-	// 	return http.StatusInternalServerError, err
-	// }
-	//
+	if err := c.CharacterRepo.DeleteCharacter(id); err != nil {
+		return http.StatusInternalServerError, err
+	}
+
 	return http.StatusNoContent, nil
 }
 

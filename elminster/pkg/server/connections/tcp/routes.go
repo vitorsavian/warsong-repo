@@ -8,4 +8,8 @@ func (e *Config) SetupRoutes() {
 	character.PUT("/:id", UpdateCharacter)
 	character.DELETE("/:id", DeleteCharacter)
 	character.POST("", CreateCharacter)
+
+	_ = api.Group("/feat")
+
+	_ = api.Group("/weapon")
 }
