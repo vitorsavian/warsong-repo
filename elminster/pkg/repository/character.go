@@ -13,7 +13,7 @@ type ConnectionClient struct {
 }
 
 var InsertStatsCharacterSQL = `
-  INSERT INTO stats(id, hp, sp, str, dex, con, inte, wil, cha, sanity, courage)
+  INSERT INTO cstats(id, hp, sp, str, dex, con, inte, wil, cha, sanity, courage)
   VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
 `
 
@@ -23,12 +23,12 @@ var InsertCharacterSQL = `
 `
 
 var GetCharacterSQL = `
-  SELECT characters.id, characters.name, characters.level, stats.hp, stats.sp, stats.str, stats.dex, stats.con, stats.inte, stats.wil, stats.cha, stats.sanity, stats.courage
-  FROM characters INNER JOIN stats ON characters.id_stats = stats.id WHERE characters.id = $1;
+  SELECT characters.id, characters.name, characters.level, cstats.hp, cstats.sp, cstats.str, cstats.dex, cstats.con, cstats.inte, cstats.wil, cstats.cha, cstats.sanity, cstats.courage
+  FROM characters INNER JOIN cstats ON characters.id_stats = stats.id WHERE characters.id = $1;
 `
 
 var DeleteStatsCharacterSQL = `
-  DELETE FROM stats WHERE id = $1;
+  DELETE FROM cstats WHERE id = $1;
 `
 
 var DeleteCharacterSQL = `
