@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -21,7 +22,11 @@ var serverCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("initianting tcp server")
 
+		fmt.Println(os.Getenv("DATABASE"))
+
 		env, _ := cmd.Flags().GetString("env")
+
+		fmt.Println(os.Getenv("DATABASE"))
 
 		environment.SetEnv(env)
 		config, err := tcp.ConfigServer()

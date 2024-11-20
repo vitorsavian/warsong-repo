@@ -1,29 +1,52 @@
-apiVersion: 1
+apiVersion: v1
 kind: Pod
-
 metadata:
   name: elminster
   labels:
     purpose: restapi
-
 spec:
   containers:
   - name: elminster-rest-container
-    image: "image here"
-
+    image: vitorsavian/elminster-server
     ports:
     - containerPort: 80
-
+    env:
+    - name: DATABASE
+      value: "elminster"
+    - name: DATABASE_USER
+      value: "elminster"
+    - name: DATABASE_PASSWORD
+      value: "elminster"
+    - name: DATABASE_IP
+      value: "192.168.18.253"
+    - name: DATABASE_PORT
+      value: "5432"
+    - name: SERVER_TCP_PORT
+      value: "80"  # O REST_PORT já está configurado como 80 no pod, mas é sempre bom definir na variável de ambiente também.
     livenessProbe:
       httpGet:
-        path: /healthz
+        path: /api/healthz
         port: 80
         httpHeaders:
-        - name: Custom-Header
-          value: awesome
+          - name: Custom-Header
+            value: awesome
       initialDelaySeconds: 5
       periodSeconds: 5
 
-    env:
-    - name: DATABASE
-      value: "TEST"
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: elminster-service
+
+spec:
+  selector:
+    purpose: restapi
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30001   # Porta externa para o serviço
+  type: NodePort      # Tipo do serviço: ClusterIP (interno), NodePort (externo), ou LoadBalancer

@@ -41,10 +41,12 @@ func (s *server) UpdateCharacter(_ context.Context, update *pb.UpdateCharacterRe
 	}, nil
 }
 
-func (s *server) DeleteCharacter() {
+// func (s *server) DeleteCharacter(_ context.Context, request *pb.DeleteCharacterRequest) (*pb.DeleteCharacterResponse, error) {
+// 	return &pb.DeleteCharacterResponse{
+// 		Response: "DELETE",
+// 	}, nil
+// }
 
-}
+// func (s *server) GetCharacter() {
 
-func (s *server) GetCharacter() {
-
-}
+// }
