@@ -1,4 +1,4 @@
-*** Dungeons and Dragons
+*** Warsong repo
 
 Go -> First project with characters and the game server
 
