@@ -29,7 +29,7 @@ function Main(args)
 		return
 	end
 
-	if args[1] == "characer" then
+	if args[1] == "character" then
 		CharacterHandler(args)
 		--   and args[2] == "character" then
 		-- local name = nil
