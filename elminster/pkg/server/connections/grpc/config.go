@@ -16,7 +16,7 @@ type server struct {
 }
 
 func NewServer() *server {
-	characterController, err := controllers.GetController()
+	characterController, err := controllers.GetCharacterController()
 	if err != nil {
 		logrus.Fatalf("Failed to get character controller: %v", err)
 	}

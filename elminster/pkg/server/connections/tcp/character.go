@@ -16,7 +16,7 @@ func CreateCharacter(c echo.Context) error {
 		return err
 	}
 
-	controller, err := controllers.GetController()
+	controller, err := controllers.GetCharacterController()
 	if err != nil {
 		logrus.Errorf("Error found while creating the controller: %s", err.Error())
 		return nil
@@ -33,7 +33,7 @@ func CreateCharacter(c echo.Context) error {
 }
 
 func GetCharacter(c echo.Context) error {
-	controller, err := controllers.GetController()
+	controller, err := controllers.GetCharacterController()
 	if err != nil {
 		logrus.Panicf("Error found while creating the controller: %s", err.Error())
 		return nil
@@ -58,7 +58,7 @@ func DeleteCharacter(c echo.Context) error {
 		return err
 	}
 
-	controller, err := controllers.GetController()
+	controller, err := controllers.GetCharacterController()
 	if err != nil {
 		logrus.Panicf("Error found while creating the controller: %s", err.Error())
 		return nil
@@ -90,7 +90,7 @@ func UpdateCharacter(c echo.Context) error {
 
 	body.Id = c.Param("id")
 
-	controller, err := controllers.GetController()
+	controller, err := controllers.GetCharacterController()
 	if err != nil {
 		logrus.Panicf("Error found while creating the controller: %s", err.Error())
 		c.JSON(http.StatusInternalServerError, &adapter.GenericResponseAdapter{

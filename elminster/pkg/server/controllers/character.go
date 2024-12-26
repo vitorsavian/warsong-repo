@@ -19,7 +19,7 @@ type CharacterController struct {
 
 var CharacterControllerStance *CharacterController
 
-func GetController() (*CharacterController, error) {
+func GetCharacterController() (*CharacterController, error) {
 	if CharacterControllerStance == nil {
 		logrus.Info("Creating controller")
 
