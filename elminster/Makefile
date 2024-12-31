@@ -1,4 +1,4 @@
-GO_FILES ?= $$(find . -name '*.go' | grep -v generated)
+GO_FILES ?= $$(find . -name '*.go' | grep -v pb)
 
 clean:
 	rm -f ./dist/elminster
