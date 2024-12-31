@@ -21,7 +21,7 @@ var CharacterControllerStance *CharacterController
 
 func GetCharacterController() (*CharacterController, error) {
 	if CharacterControllerStance == nil {
-		logrus.Info("Creating controller")
+		logrus.Info("Creating character controller")
 
 		lockCharacterController.Lock()
 		defer lockCharacterController.Unlock()
@@ -40,7 +40,7 @@ func GetCharacterController() (*CharacterController, error) {
 		}
 	}
 
-	logrus.Info("Controller delivered")
+	logrus.Info("Character controller delivered")
 	return CharacterControllerStance, nil
 }
 

@@ -13,29 +13,30 @@ type ConnectionClient struct {
 }
 
 var InsertStatsCharacterSQL = `
-  INSERT INTO cstats(id, hp, sp, str, dex, con, inte, wil, cha, sanity, courage)
-  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
+  	INSERT INTO cstats(id, hp, sp, str, dex, con, inte, wil, cha, sanity, courage)
+  	VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
 `
 
 var InsertCharacterSQL = `
-  INSERT INTO characters(id, name, level, id_stats)
-  VALUES($1, $2, $3, $4);
+  	INSERT INTO characters(id, name, level, id_stats)
+  	VALUES($1, $2, $3, $4);
 `
 
 var GetCharacterSQL = `
-  SELECT characters.id, characters.name, characters.level, cstats.hp, cstats.sp, cstats.str, cstats.dex, cstats.con, cstats.inte, cstats.wil, cstats.cha, cstats.sanity, cstats.courage
-  FROM characters INNER JOIN cstats ON characters.id_stats = stats.id WHERE characters.id = $1;
+  	SELECT characters.id, characters.name, characters.level, cstats.hp, cstats.sp, cstats.str, cstats.dex, cstats.con, cstats.inte, cstats.wil, cstats.cha, cstats.sanity, cstats.courage
+  	FROM characters INNER JOIN cstats ON characters.id_stats = stats.id WHERE characters.id = $1;
 `
 
 var DeleteStatsCharacterSQL = `
-  DELETE FROM cstats WHERE id = $1;
+  	DELETE FROM cstats WHERE id = $1;
 `
 
 var DeleteCharacterSQL = `
-  DELETE FROM characters WHERE id = $1;
+	DELETE FROM characters WHERE id = $1;
 `
 
 var UpdateCharacterSQL = `
+
 `
 
 func (c *ConnectionClient) CreateCharacter(char *domain.Character) error {

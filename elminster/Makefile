@@ -1,3 +1,5 @@
+GO_FILES ?= $$(find . -name '*.go' | grep -v generated)
+
 clean:
 	rm -f ./dist/elminster
 
@@ -23,3 +25,7 @@ generate:
 	pkg/server/connections/grpc/pb/weapon.proto \
 	pkg/server/connections/grpc/pb/ping.proto
 
+format:
+	echo $(GO_FILES)
+	gofmt -s -l -w $(GO_FILES)
+	goimports -w $(GO_FILES)

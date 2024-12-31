@@ -2,6 +2,7 @@ package adapter
 
 import (
 	"errors"
+
 	"github.com/google/uuid"
 )
 
