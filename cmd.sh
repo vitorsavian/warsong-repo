@@ -3,15 +3,16 @@
 function usage() {
     echo "Usage: $0 [options]"
     echo "Options:"
-    echo "  -h, --help     Show this message"
     echo "  elminster    Use Elminster"
     echo "  tasha        Use Tasha"
     echo "  docker       Use Docker"
+    echo "  -h, --help     Show this message"
 }
 
 function usage_elminster() {
     echo "Usage: $0 elminster [options]"
     echo "Options:"
+    ##echo "  migrate"
     echo "  -h, --help     Show this message"
 }
 
@@ -27,6 +28,14 @@ function handle_elminster() {
     case $1 in
     -h|--help)
         usage_elminster
+        ;;
+    migrate-down)
+        cd ./elminster
+        make migrate
+        ;;
+    migrate-up)
+        cd ./elminster
+        make migrate-down
         ;;
     *)
         usage_elminster
@@ -48,7 +57,7 @@ function handle_docker() {
         exit 1
         ;;
     esac
-    
+
 }
 
 # function usage_tasha() {
