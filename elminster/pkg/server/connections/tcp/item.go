@@ -1,9 +1,13 @@
 package tcp
 
-func CreateItem() {}
+import "github.com/labstack/echo/v4"
 
-func UpdateItem() {}
+func CreateItem(c echo.Context) {
 
-func DeleteItem() {}
+}
 
-func GetItem() {}
+func UpdateItem(c echo.Context) {}
+
+func DeleteItem(c echo.Context) {}
+
+func GetItem(c echo.Context) {}

@@ -1,9 +1,11 @@
 package tcp
 
-func CreateFeat() {}
+import "github.com/labstack/echo/v4"
 
-func UpdateFeat() {}
+func CreateFeat(c echo.Context) {}
 
-func DeleteFeat() {}
+func UpdateFeat(c echo.Context) {}
 
-func GetFeat() {}
+func DeleteFeat(c echo.Context) {}
+
+func GetFeat(c echo.Context) {}

@@ -1,17 +1,19 @@
 package tcp
 
-func CreateMonster() {
+import "github.com/labstack/echo/v4"
+
+func CreateMonster(c echo.Context) {
 
 }
 
-func UpdateMonster() {
+func UpdateMonster(c echo.Context) {
 
 }
 
-func DeleteMonster() {
+func DeleteMonster(c echo.Context) {
 
 }
 
-func GetMonster() {
+func GetMonster(c echo.Context) {
 
 }
