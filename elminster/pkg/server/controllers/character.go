@@ -75,6 +75,7 @@ func (c *CharacterController) UpdateCharacter(body *adapter.CharacterUpdateReque
 	if err := c.CharacterRepo.UpdateCharacter(char); err != nil {
 		return http.StatusInternalServerError, err
 	}
+
 	return http.StatusNoContent, nil
 }
 

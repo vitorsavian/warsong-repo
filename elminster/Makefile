@@ -26,6 +26,5 @@ generate:
 	pkg/server/connections/grpc/pb/ping.proto
 
 format:
-	echo $(GO_FILES)
 	gofmt -s -l -w $(GO_FILES)
 	goimports -w $(GO_FILES)
