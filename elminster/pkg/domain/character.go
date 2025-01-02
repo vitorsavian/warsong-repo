@@ -1,6 +1,8 @@
 package domain
 
 import (
+	"errors"
+
 	"github.com/google/uuid"
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/adapter"
 )
@@ -29,7 +31,23 @@ type Character struct {
 	Feat []Feat
 }
 
-func CreateCharacter(body *adapter.CharacterCreationRequestAdapter) (*Character, error) {
+func ValidateCharacter(body *Character) error {
+	if body.Level <= 0 {
+		return errors.New("level is below zero or zero")
+	}
+
+	if body.Name == "" {
+		return errors.New("name is blank")
+	}
+
+	if body.Str < 0 || body.Dex < 0 || body.Con < 0 || body.Cha < 0 || body.Wil < 0 || body.Int < 0 {
+		return errors.New("stats for the character are negative")
+	}
+
+	return nil
+}
+
+func CreateCharacter(body *adapter.CharacterCreationRequestAdapter) *Character {
 	newCharacter := &Character{
 		Id:    uuid.New().String(),
 		Level: body.Level,
@@ -47,10 +65,10 @@ func CreateCharacter(body *adapter.CharacterCreationRequestAdapter) (*Character,
 	newCharacter.SetSanity()
 	newCharacter.SetCourage()
 
-	return newCharacter, nil
+	return newCharacter
 }
 
-func UpdateCharacter(body *adapter.CharacterUpdateRequestAdapter) (*Character, error) {
+func UpdateCharacter(body *adapter.CharacterUpdateRequestAdapter) *Character {
 	character := &Character{
 		Id:    body.Id,
 		Level: body.Level,
@@ -68,7 +86,7 @@ func UpdateCharacter(body *adapter.CharacterUpdateRequestAdapter) (*Character, e
 	character.SetCourage()
 	character.SetSanity()
 
-	return character, nil
+	return character
 }
 
 func (c *Character) LevelUp() {

@@ -9,6 +9,7 @@ import (
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/domain"
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/infra/db"
 	"github.com/vitorsavian/warsong-repo/elminster/pkg/repository"
+	"github.com/vitorsavian/warsong-repo/elminster/pkg/utils"
 )
 
 var lockCharacterController = &sync.Mutex{}
@@ -45,16 +46,14 @@ func GetCharacterController() (*CharacterController, error) {
 }
 
 func (c *CharacterController) CreateCharacter(body *adapter.CharacterCreationRequestAdapter) (int, error) {
-	if err := adapter.CheckCreateBody(body); err != nil {
+	char := domain.CreateCharacter(body)
+
+	if err := domain.ValidateCharacter(char); err != nil {
 		return http.StatusBadRequest, err
 	}
 
-	char, err := domain.CreateCharacter(body)
-	if err != nil {
-		return http.StatusBadRequest, err
-	}
-
-	err = c.CharacterRepo.CreateCharacter(char)
+	char.Id = utils.CreateId()
+	err := c.CharacterRepo.CreateCharacter(char)
 	if err != nil {
 		return http.StatusInternalServerError, err
 	}
@@ -63,11 +62,13 @@ func (c *CharacterController) CreateCharacter(body *adapter.CharacterCreationReq
 }
 
 func (c *CharacterController) UpdateCharacter(body *adapter.CharacterUpdateRequestAdapter) (int, error) {
-	if err := adapter.CheckUpdateBody(body); err != nil {
+	if err := utils.ValidateId(body.Id); err != nil {
 		return http.StatusBadRequest, err
 	}
 
-	char, err := domain.UpdateCharacter(body)
+	char := domain.UpdateCharacter(body)
+
+	err := domain.ValidateCharacter(char)
 	if err != nil {
 		return http.StatusBadRequest, err
 	}
