@@ -426,3 +426,5 @@ vendor
 .env
 
 dist/
+
+/mordenkeinen/build/*

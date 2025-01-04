@@ -6,4 +6,6 @@ type Item struct {
 	Value int32
 
 	Type ItemType
+
+	IsEquipped bool
 }
