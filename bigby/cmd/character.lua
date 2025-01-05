@@ -1,5 +1,5 @@
 function CharacterHelp()
-	print("Usage: owlbear character [COMMAND] [OPTIONS]")
+	print("Usage: bigby character [COMMAND] [OPTIONS]")
 	print("COMMAND:")
 	print("  create     Create character")
 	print("  update     Update character")
@@ -10,7 +10,7 @@ function CharacterHelp()
 end
 
 function CharacterCreateHelp()
-	print("Usage: owlbear character create [OPTIONS]")
+	print("Usage: bigby character create [OPTIONS]")
 	print("COMMAND:")
 	print("")
 	print("OPTIONS:")
@@ -18,7 +18,7 @@ function CharacterCreateHelp()
 end
 
 function CharacterUpdateHelp()
-	print("Usage: owlbear character update [OPTIONS]")
+	print("Usage: bigby character update [OPTIONS]")
 	print("COMMAND:")
 	print("")
 	print("OPTIONS:")
@@ -26,7 +26,7 @@ function CharacterUpdateHelp()
 end
 
 function CharacterGetHelp()
-	print("Usage: owlbear character get [OPTIONS]")
+	print("Usage: bigby character get [OPTIONS]")
 	print("COMMAND:")
 	print("")
 	print("OPTIONS:")
@@ -34,7 +34,7 @@ function CharacterGetHelp()
 end
 
 function CharacterDeleteHelp()
-	print("Usage: owlbear character delete [OPTIONS]")
+	print("Usage: bigby character delete [OPTIONS]")
 	print("COMMAND:")
 	print("")
 	print("OPTIONS:")

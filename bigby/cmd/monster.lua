@@ -1,5 +1,5 @@
 function MonsterHelp()
-	print("USAGE: owlbear monster [COMMAND] [OPTIONS]")
+	print("USAGE: bigby monster [COMMAND] [OPTIONS]")
 	print("COMMAND:")
 	print("  create     Create monster")
 	print("  update     Update monster")
@@ -10,7 +10,7 @@ function MonsterHelp()
 end
 
 function MonsterCreateHelp()
-	print("Usage: owlbear monster create [OPTIONS]")
+	print("Usage: bigby monster create [OPTIONS]")
 	print("COMMAND:")
 	print("")
 	print("OPTIONS:")
@@ -18,7 +18,7 @@ function MonsterCreateHelp()
 end
 
 function MonsterUpdateHelp()
-	print("Usage: owlbear monster update [OPTIONS]")
+	print("Usage: bigby monster update [OPTIONS]")
 	print("COMMAND:")
 	print("")
 	print("OPTIONS:")
@@ -26,7 +26,7 @@ function MonsterUpdateHelp()
 end
 
 function MonsterGetHelp()
-	print("Usage: owlbear monster get [OPTIONS]")
+	print("Usage: bigby monster get [OPTIONS]")
 	print("COMMAND:")
 	print("")
 	print("OPTIONS:")
@@ -34,7 +34,7 @@ function MonsterGetHelp()
 end
 
 function MonsterDeleteHelp()
-	print("Usage: owlbear monster delete [OPTIONS]")
+	print("Usage: bigby monster delete [OPTIONS]")
 	print("COMMAND:")
 	print("")
 	print("OPTIONS:")

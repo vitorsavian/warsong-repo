@@ -428,3 +428,5 @@ vendor
 dist/
 
 /mordenkeinen/build/*
+
+/bigby/build/*

@@ -1,5 +1,5 @@
 function NpcHelp()
-	print("Usage: owlbear npc [COMMAND] [OPTIONS]")
+	print("Usage: bigby npc [COMMAND] [OPTIONS]")
 	print("COMMAND:")
 	print("  create     Create npc")
 	print("  update     Update npc")
@@ -10,7 +10,7 @@ function NpcHelp()
 end
 
 function NpcCreateHelp()
-	print("Usage: owlbear npc create [OPTIONS]")
+	print("Usage: bigby npc create [OPTIONS]")
 	print("COMMAND:")
 	print("")
 	print("OPTIONS:")
@@ -18,7 +18,7 @@ function NpcCreateHelp()
 end
 
 function NpcUpdateHelp()
-	print("Usage: owlbear npc update [OPTIONS]")
+	print("Usage: bigby npc update [OPTIONS]")
 	print("COMMAND:")
 	print("")
 	print("OPTIONS:")
@@ -26,7 +26,7 @@ function NpcUpdateHelp()
 end
 
 function NpcGetHelp()
-	print("Usage: owlbear npc get [OPTIONS]")
+	print("Usage: bigby npc get [OPTIONS]")
 	print("COMMAND:")
 	print("")
 	print("OPTIONS:")
@@ -34,7 +34,7 @@ function NpcGetHelp()
 end
 
 function NpcDeleteHelp()
-	print("Usage: owlbear npc delete [OPTIONS]")
+	print("Usage: bigby npc delete [OPTIONS]")
 	print("COMMAND:")
 	print("")
 	print("OPTIONS:")

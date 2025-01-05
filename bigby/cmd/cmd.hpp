@@ -1,5 +1,5 @@
-#ifndef CLI_H_
-#define CLI_H_
+#ifndef CMD_H_
+#define CMD_H_
 
 typedef struct {
   char *command;
@@ -10,4 +10,4 @@ void cliHelp();
 void cliTitle();
 int cliVerify();
 
-#endif // !CLI_H_
+#endif // !CMD_H_
