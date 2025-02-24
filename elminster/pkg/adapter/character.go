@@ -33,8 +33,3 @@ type StatsCharacterUpdateRequestAdapter struct {
 	Int int8 `json:"int"`
 	Wil int8 `json:"wil"`
 }
-
-type GenericResponseAdapter struct {
-	Status  int    `json:"status"`
-	Message string `json:"message"`
-}
